@@ -84,8 +84,11 @@ extension CuteAttribute where Base: NSMutableAttributedString {
     ///
     /// - Parameter str: String
     /// - Returns: [NSRange]
-    internal func rangeFrom(string str: String) -> [NSRange] {
-        var range = base.string.lowercased().range(substring: str.lowercased())
+    internal func rangeFrom(string str: String, lowercased: Bool = false) -> [NSRange] {
+        let baseValue = lowercased ? base.string.lowercased() : base.string
+        let stringValue = lowercased ? str.lowercased() : str
+        
+        var range = baseValue.lowercased().range(substring: stringValue)
         var tapRanges: [NSRange] = []
         assert(range.location != NSNotFound, "Substring must be in string.")
         tapRanges.append(range)
